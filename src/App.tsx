@@ -12,7 +12,8 @@ import {
   Plus,
   Calendar,
   Wallet,
-  User
+  User,
+  X
 } from 'lucide-react';
 import { DataRecord } from './data/sampleData';
 import { cn } from './lib/utils';
@@ -347,21 +348,29 @@ export default function App() {
                 <input 
                   type="text" 
                   placeholder="Cari nama atau alamat..." 
-                  className="pl-10 pr-4 py-3 bg-slate-100 border-2 border-transparent rounded-2xl text-sm w-full focus:border-rose-500/20 focus:bg-white transition-all outline-none shadow-inner"
+                  className="pl-10 pr-10 py-3 bg-slate-100 border-2 border-transparent rounded-xl text-sm w-full focus:border-rose-500/20 focus:bg-white transition-all outline-none shadow-inner"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                 />
+                {search && (
+                  <button 
+                    onClick={() => setSearch('')}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-slate-200 rounded-full text-slate-400 hover:text-rose-600 transition-all"
+                  >
+                    <X size={16} />
+                  </button>
+                )}
               </div>
               <button 
                 onClick={fetchData}
-                className="p-3 bg-slate-100 hover:bg-rose-50 rounded-2xl transition-all text-slate-400 hover:text-rose-600 border-2 border-transparent hover:border-rose-100 shrink-0 shadow-sm active:scale-95"
+                className="p-3 bg-slate-100 hover:bg-rose-50 rounded-xl transition-all text-slate-400 hover:text-rose-600 border-2 border-transparent hover:border-rose-100 shrink-0 shadow-sm active:scale-95"
                 title="Refresh Data"
               >
                 <RefreshCw size={20} className={cn(loading && "animate-spin")} />
               </button>
             </div>
             
-            <div className="flex items-center gap-2 bg-slate-100 p-1.5 rounded-2xl w-full sm:w-auto">
+            <div className="flex items-center gap-2 bg-slate-100 p-1.5 rounded-xl w-full sm:w-auto">
               <Filter size={16} className="ml-2 text-slate-400" />
               <div className="flex gap-1 w-full sm:w-auto">
                 {[50, 100, 'all'].map((limit) => (
@@ -369,7 +378,7 @@ export default function App() {
                     key={limit}
                     onClick={() => setDataLimit(limit as any)}
                     className={cn(
-                      "flex-1 sm:flex-none px-4 py-1.5 rounded-xl text-xs font-black transition-all",
+                      "flex-1 sm:flex-none px-4 py-1.5 rounded-lg text-xs font-black transition-all",
                       dataLimit === limit 
                         ? "bg-white text-rose-600 shadow-sm" 
                         : "text-slate-500 hover:text-slate-700"
@@ -386,7 +395,7 @@ export default function App() {
 
       <main className="max-w-6xl mx-auto px-4 py-8">
         {/* Responsive Container */}
-        <div className="bg-white rounded-3xl border border-slate-200 shadow-xl shadow-slate-200/50 overflow-hidden min-h-[400px] relative">
+        <div className="bg-white rounded-xl border border-slate-200 shadow-xl shadow-slate-200/50 overflow-hidden min-h-[400px] relative">
           
           {loading && data.length === 0 && (
             <div className="absolute inset-0 bg-white/50 backdrop-blur-[1px] z-10 flex items-center justify-center">
